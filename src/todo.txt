@@ -1,0 +1,10 @@
+-Button = onClick() => open qrReader and scan, then pass that value to songs then display songs and play
+(FIND OUT HOW TO SEND PROPS FROM ONE COMPONENT TO ANOTHER) =>
+(qrReader will have album name/code => give to <Songs />)
+
+
+To create global accessible state (not sure if that's the actual term but state that you can access from any component Maybe it's called shared state)
+=> Redux? MobX?
+
+
+Note: Context API will do what we need but if I ever want to expand it then it wont
