@@ -14,12 +14,13 @@ class Songs extends Component {
     }
     
 //TODO: make sure that it only makes one request !!! very important or else whole app crashes
-
+//TODO: learn git branches
 //TODO:finish getting data, then work on ui
 componentDidUpdate(prevProps,prevState){
     console.log("Component did update");
     console.log(prevProps);
     let rawAlbumCode = prevProps.albumCode;
+    if(rawAlbumCode != null) {
     let passableAlbumCode = rawAlbumCode.toString();
     console.log("passable album code: ", passableAlbumCode);
     if(this.state.count < 3) {
@@ -28,6 +29,7 @@ componentDidUpdate(prevProps,prevState){
             album: passableAlbumCode
         }
     }).then((result) => {
+        console.log("request made and completed")
         console.log("songs", result.data.songs);
         console.log(this.state.songs);
         if(result.data.songs.length !== 0){
@@ -41,9 +43,7 @@ componentDidUpdate(prevProps,prevState){
     });
 
 }
-this.setState({
-    count: count+1
-});
+    }
 }
 
 

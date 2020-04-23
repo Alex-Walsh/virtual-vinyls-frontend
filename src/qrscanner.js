@@ -8,7 +8,7 @@ class Reader extends Component {
   }
  
   handleScan = data => {
-    if (data) {
+    if (data !== this.state.result) {
       this.setState({
         result: data
       })
