@@ -6,22 +6,46 @@ class Songs extends Component {
         super(props);
         this.state = {
             songs: [],
+            count: 0,
+
             //will be for if the client doesn't want to/can't scan qr code
-            requestedAlbumCode: ""
+            requestedAlbumCode: this.props.albumCode
         }
     }
     
-    componentDidMount() {
-        return axios.get('http://localhost:5001/virtual-vinyls/us-central1/api/albums', {
-            params: {
-                album:"123456"
-            }
-        }).then((response) => {
+//TODO: make sure that it only makes one request !!! very important or else whole app crashes
+
+//TODO:finish getting data, then work on ui
+componentDidUpdate(prevProps,prevState){
+    console.log("Component did update");
+    console.log(prevProps);
+    let rawAlbumCode = prevProps.albumCode;
+    let passableAlbumCode = rawAlbumCode.toString();
+    console.log("passable album code: ", passableAlbumCode);
+    if(this.state.count < 3) {
+    axios.get("https://us-central1-virtual-vinyls.cloudfunctions.net/api/albums", {
+        params: {
+            album: passableAlbumCode
+        }
+    }).then((result) => {
+        console.log("songs", result.data.songs);
+        console.log(this.state.songs);
+        if(result.data.songs.length !== 0){
             this.setState({
-                songs: response.data.songs
+                songs: result.data.songs 
             });
-        })    
-    }
+        }
+        console.log(this.state.songs);
+    }).catch((error) => {
+        console.log(error);
+    });
+
+}
+this.setState({
+    count: count+1
+});
+}
+
 
     render() {
         return (

@@ -26,7 +26,7 @@ class Reader extends Component {
           onScan={this.handleScan}
           style={{ width: '20%' }}
         />
-        <Songs/>
+        <Songs albumCode={this.state.result}/>
         <p>{this.state.result}</p>
       </div>
     )
